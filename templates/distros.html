@@ -1,0 +1,48 @@
+{% extends 'common/base.html' %}
+{% load static %}
+{% block content %}
+<link href="{% static 'styles/distros.css'  %}" rel="stylesheet" type="text/css">
+<h2>Linux Distros</h2>
+    <!--Дистрибутивы Линукс-->
+  <table>
+    <ol type="I">
+        <img src="{% static 'images/debian.png' %}" alt="Debian" width="10%">
+        <li>
+            <b>Debian-based</b>
+            <ol type="a">
+                <li class="distro"><a href="https://www.debian.org/">Debian GNU/Linux</a></li>
+                <li class="distro"><a href="https://ubuntu.com/">Ubuntu</a></li>
+                <li class="distro"><a href="https://elementary.io/">Elementary OS</a></li>
+                <li class="distro"><a href="https://pop.system76.com/">Pop!_OS</a></li>
+            </ol>
+        </li>
+        <img src="{% static 'images/arch.png' %}" alt="arch" width="10%">
+        <li>
+            <b>Arch-based</b>
+            <ol type="a">
+                <li class="distro"><a href="https://archlinux.org/">Arch Linux</a></li>
+                <li class="distro"><a href="https://manjaro.org/">Manjaro Linux</a></li>
+                <li class="distro"><a href="https://endeavouros.com/">Endevaour OS</a></li>
+                <li class="distro"><a href="https://www.parabola.nu/">Parabola GNU/Linux-libre</a></li>
+            </ol>
+        </li>
+        <img src="{% static 'images/fedora.png' %}" alt="Fedora" width="10%">
+        <li>
+            <b>Red Hat Linux</b>
+            <ol type="a">
+                <li class="distro"><a href="https://getfedora.org/">Fedora</a></li>
+                <li class="distro"><a href="https://www.centos.org/">CentOS</a></li>
+            </ol>
+        </li>
+        <img src="{% static 'images/gentoo.png' %}" alt="Gentoo" width="10%">
+        <li>
+            <b>Gentoo</b>
+            <ol type="a">
+                <li class="distro"><a href="https://www.gentoo.org">Gentoo GNU/Linux</a></li>
+                <li class="distro"><a href="https://www.funtoo.org/Welcome">Funtoo</a></li>
+                <li class="distro"><a href="https://github.com/StefanCristian/zentoo">Zentoo</a></li>
+            </ol>
+        </li>
+    </ol>
+  </table>
+{% endblock %}

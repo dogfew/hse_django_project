@@ -1,0 +1,103 @@
+nav {
+    border: 1px groove black;
+    transition: .2s linear;
+    border-radius: 15px;
+    text-align: center;
+    background-image: url("../images/psychopass.jpg");
+    background-size: 100%;
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+.nonCurrent {
+    text-decoration: none;
+    color: #fff;
+    display: inline-block;
+    background: #1f7c8c;
+    min-width: 200px;
+    padding: 20px 30px;
+    margin: 15px;
+    border-radius: 10px;
+    transition: .1s linear;
+}
+
+.nonCurrent:hover {
+    box-shadow: 500px 0 0 0 rgba(0, 0, 0, .3) inset;
+}
+
+.exo {
+    text-decoration: none;
+    color: #fff;
+    display: inline-block;
+    background: #153e60;
+    min-width: 200px;
+    padding: 20px 30px;
+    margin: 15px;
+    border-radius: 10px;
+    transition: .1s linear;
+}
+.exo:hover {
+    box-shadow: 500px 0 0 0 rgba(0, 0, 0, .3) inset;
+}
+.current {
+    text-decoration: none;
+    color: #fff;
+    display: inline-block;
+    min-width: 200px;
+    padding: 20px 30px;
+    margin: 15px;
+    border-radius: 10px;
+    transition: .1s linear;
+    background: #FF7A42;
+}
+
+.current:hover {
+    box-shadow: 500px 0 0 0 rgba(0, 0, 0, .3) inset;
+}
+.code {
+    background: #f5f5f5;
+    background-clip: border-box;
+    border: 1px solid #e6e6e6;
+    border-radius: 10px;
+    word-spacing: 2px;
+    padding: .8571429em 1.1428571em;
+    margin-bottom: 1.7142857em;
+    margin-top: 1.7142857em;
+    overflow-x: scroll;
+    text-overflow: clip;
+    white-space: nowrap;
+    font-size: large;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 80%;
+    display: block;
+}
+h2 {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    background: #ef6d6d;
+    background-clip: border-box;
+    border-radius: 5px;
+    padding: 7px 7px;
+    color: white;
+    max-width: 700px;
+}
+
+h3 {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    background: #209672;
+    background-clip: border-box;
+    border-radius: 15px;
+    padding: 7px 7px;
+    color: white;
+    max-width: 500px;
+}
+
+
+a {
+    text-decoration: none;
+    color: black;
+}

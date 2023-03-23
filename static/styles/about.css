@@ -1,0 +1,65 @@
+li {
+padding: 7px 20px;
+margin-bottom: 10px;
+border-radius: 5px;
+border-left: 10px solid #e3c200;
+border-right: 10px solid #bb1717;
+box-shadow: 2px -2px 5px 0 rgba(0,0,0,.1),
+     -2px -2px 5px 0 rgba(0,0,0,.1),
+    2px 2px 5px 0 rgba(0,0,0,.1),
+    -2px 2px 5px 0 rgba(0,0,0,.1);
+font-size: 20px;
+letter-spacing: 2px;
+transition: 0.3s all linear;
+}
+.content {
+    padding: 7px 20px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 2px -2px 5px 0 rgba(0,0,0,.1),
+             -2px -2px 5px 0 rgba(0,0,0,.1),
+            2px 2px 5px 0 rgba(0,0,0,.1),
+            -2px 2px 5px 0 rgba(0,0,0,.1);
+    font-size: 20px;
+    letter-spacing: 2px;
+}
+table  {
+    border-collapse: separate;
+    border-spacing: 10px 20px;
+    background-image: url("../images/GNU.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+th, td {
+    padding: 20px 15px;
+    border-collapse: collapse;
+    border-right: 3px solid #39b64e;
+}
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.content {
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    margin-top: 20px;
+    border-radius: 5px;
+    box-shadow: 2px -2px 5px 0 rgba(0,0,0,.1),
+             -2px -2px 5px 0 rgba(0,0,0,.1),
+            2px 2px 5px 0 rgba(0,0,0,.1),
+            -2px 2px 5px 0 rgba(0,0,0,.1);
+    font-size: 20px;
+    letter-spacing: 2px;
+}
+h4 {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    background: #ef6d6d;
+    background-clip: border-box;
+    border-radius: 15px;
+    padding: 7px 7px;
+    color: white;
+    max-width: 500px;
+}

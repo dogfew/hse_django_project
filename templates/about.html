@@ -1,0 +1,72 @@
+<title>About</title>
+{% extends 'common/base.html' %}
+{% load static %}
+{% block content %}
+<link href="{% static 'styles/about.css'  %}" rel="stylesheet" type="text/css">
+<h2 id="1">About OpenSource</h2>
+<div class="content">
+<h4> FOSS give you next freedoms: </h4>
+  <ul>
+<li>The freedom to run the program as you wish, for
+  any purpose (freedom 0).</li>
+<li>The freedom to study how the program works, and
+  change it so it does your computing as you wish
+  (freedom 1). Access to the source code is a
+  precondition for this.</li>
+<li>The freedom to redistribute copies so you can help others (freedom 2).
+<li>The freedom to distribute copies of your modified
+  versions to others (freedom 3). By doing this you can give the whole community a chance to benefit from your changes. Access to the source code is a precondition for this
+</li>
+  </ul>
+</div>
+<div class="content">
+<h4>Good open-source programs:</h4>
+<table>
+    <tbody>
+    <tr>
+    <th>Name of program</th>
+    <th>Description</th>
+    </tr>
+    <tr>
+    <th><a href="https://obsproject.com/">OBS-Studio</a> <br> <img src="{% static 'images/1024px-OBS_Studio_Logo.svg.png' %}" alt="" width="100px"></th>
+    <th>OBS Studio is a free, open-source, and cross-platform screencasting and streaming app. It is available for Windows, macOS, Linux distributions, and BSD. OBS Project raises funds on Open Collective and Patreon</th>
+    </tr>
+    <tr>
+    <th><a href="https://www.gimp.org/">GIMP</a> <br><img src="{% static 'images/gimp.png' %}" alt="" width="100px"></th>
+    <th>GIMP is a free and open-source raster graphics editor used for image manipulation (retouching) and image editing, free-form drawing, transcoding between different image file formats, and more specialized tasks.
+    </th>
+        
+    </tr>
+    <tr>
+    <th><a href="https://ru.libreoffice.org/">LibreOffice</a> <br>
+        <img src="{% static 'images/libreoffice.png' %}" alt="" width="100px"></th>
+        <th>LibreOffice is a free and open-source office productivity software suite, a project of The Document Foundation (TDF). It was forked in 2010 from OpenOffice.org, an open-sourced version of the earlier StarOffice. The LibreOffice suite consists of programs for word processing, creating and editing of spreadsheets, slideshows, diagrams and drawings, working with databases, and composing mathematical formulae. It is available in 115 languages.</th>
+    </tr>
+    <tr>
+    <th><a href="https://www.blender.org/">Blender</a> <br>
+    <img src="{% static 'images/blender.png' %}" alt="" width="100px"></th>
+    <th>Blender is a free and open-source 3D computer graphics software toolset used for creating animated films, visual effects, art, 3D printed models, motion graphics, interactive 3D applications, virtual reality, and computer games. Blender's features include 3D modeling, UV unwrapping, texturing, raster graphics editing, rigging and skinning, fluid and smoke simulation, particle simulation, soft body simulation, sculpting, animating, match moving, rendering, motion graphics, video editing, and compositing. </th>
+    </tr>
+    <tr>
+    <th><a href="https://www.blender.org/">VLC media player</a> <br>
+        <img src="{% static 'images/vlc.png' %}" alt="" width="100px"></th>
+    <th>VLC media player is a free and open-source, portable, cross-platform media player software and streaming media server developed by the VideoLAN project.</th>
+    </tr>
+    <tr>
+    <th><a href="https://www.audacityteam.org/">Audacity</a> <br>
+        <img src="{% static 'images/audacity.png' %}" alt="" width="100px"></th>
+    <th>Audacity is an easy-to-use, multi-track audio editor and recorder for Windows, macOS, GNU/Linux and other operating systems. Developed by a group of volunteers as open source.</th>
+    </tr>
+        <tr>
+    <th><a href="https://www.audacityteam.org/">Kdenlive</a> <br>
+        <img src="{% static 'images/Kdenlive_new_logo.png' %}" alt="" width="100px"></th>
+    <th>Kdenlive is a free and open-source video editing software based on the MLT Framework, KDE and Qt. </th>
+    </tr>
+    </tbody>
+
+</table>
+</div>
+<div class="content">
+    <a href="{% url 'about' %}#1"><h4>go up!</h4></a>
+</div>
+{% endblock %}

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang='en'>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>{{page_title}}</title>
+
+    <link href="{% static 'styles/style.css'  %}" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<!-- Ссылки -->
+
+<nav class="menu">
+    <a href="{% url 'home' %}"><span class="{% if request.path == '/' %}current{% else %}nonCurrent{% endif %}">Main page</span></a>
+    <a href="{% url 'formulas' %}"><span class="{% if request.path == '/formulas' %}current{% else %}nonCurrent{% endif %}">LaTeX formulas</span></a>
+    <a href="{% url 'codes' %}"><span class="{% if request.path == '/codes' %}current{% else %}nonCurrent{% endif %}">Codes</span></a>
+    <a href="{% url 'distros' %}"><span class="{% if request.path == '/distros' %}current{% else %}nonCurrent{% endif %}">Linux Distros</span></a>
+    <a href="{% url 'beautiful' %}"><span class="{% if request.path == '/beautiful' %}current{% else %}nonCurrent{% endif %}">Beautiful page</span></a>
+    <a href="{% url 'interactive' %}"><span class="{% if request.path == '/interactive' %}current{% else %}nonCurrent{% endif %}">Calculator</span></a>
+    <a href="{% url 'opinion' %}"><span class="{% if request.path == '/opinion' %}current{% else %}nonCurrent{% endif %}">Form</span></a>
+    <a href="{% url 'forms' %}"><span class="{% if request.path == '/forms' %}current{% else %}nonCurrent{% endif %}">Send your personal data to us!</span></a>
+    <a href="{% url 'about' %}"><span class="{% if request.path == '/about' %}current{% else %}nonCurrent{% endif %}">About FOSS</span></a>
+    <a href="https://www.fsf.org/" target="_blank"><span class="exo"><img src="{% static 'images/fsf.png'  %}" alt="" width="200px"></span></a>
+</nav>
+
+{% block content %}
+{% endblock %}
+</body>
+</html>
