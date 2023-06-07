@@ -12,18 +12,19 @@
 </head>
 
 <body>
-
+{#{% load bootstrap3 %}#}
+{#{% bootstrap_css %}#}
 <!--Меню-->
 <nav class="menu">
     {% for page in pages %}
         <a href="{% url 'page' nav=page.nav %}">
-            <span class="{% if request.path == page.get_absolute_url %}current{% else %}nonCurrent{% endif %}">
+            <span class="{% if request.path|slice:"1:-1" == page.nav%}current{% else %}nonCurrent{% endif %}">
                 {{ page.title }}
             </span>
         </a>
     {% endfor %}
     <a href="/guessing">
-        <span class="{% if request.path == page.get_absolute_url %}current{% else %}nonCurrent{% endif %}">
+        <span class="{% if request.path == '/guessing/'%}current{% else %}nonCurrent{% endif %}">
             Задача
         </span>
     </a>

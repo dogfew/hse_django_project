@@ -16,19 +16,21 @@
 </div>
 <button id="show-table-button" class="button" onclick="toggleTable()">Вывести таблицу</button>
 <button onclick="goBack()" class="button">Назад</button>
-
+<button class="button"><a href="table" style="color: white">Посмотреть на таблицу подробнее</a></button>
 <div id="results-container">
 
 <div class="table" id="results-table" style="display: {% if not condition %}none{% endif %}">
 <table>
   <thead>
     <tr>
-      <th>Average Correct</th>
       <th>Average Number</th>
+      <th>Average Correct</th>
+        <th>Number of Observations</th>
     </tr>
     <tr>
-      <td>{{ avg_correct }}</td>
       <td>{{ avg_number }}</td>
+      <td>{{ avg_correct }}</td>
+        <td>{{ n_guesses }}</td>
     </tr>
     <tr>
       <th>Number
