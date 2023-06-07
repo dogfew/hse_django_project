@@ -38,6 +38,9 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     'foss.apps.FossConfig',
+    "bootstrap3",
+    "django_tables2",
+    "django_filters",
     'number_guessing',
 ]
 
