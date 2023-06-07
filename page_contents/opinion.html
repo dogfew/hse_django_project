@@ -1,0 +1,26 @@
+<div class="page-content">
+
+<br>
+<div class="table">
+<table id="distros-table">
+    <thead>
+    <tr>
+        <th>Name of Linux Distro</th>
+        <th>Publish date</th>
+        <th>Rating of Distro</th>
+        <th>Impressions </th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for item in query_results %}
+    <tr>
+        <td>{{ item.distro_name }}</td>
+        <td>{{ item.date }}</td>
+        <td>{{ item.rate }}</td>
+        <td>{{ item.opinion }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</div>
+</div>

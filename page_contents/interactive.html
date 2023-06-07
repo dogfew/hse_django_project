@@ -1,0 +1,62 @@
+{% load static %}
+
+<div class="span-block">
+    <span id="output" class="result">1, 2</span>
+    <input id='expected' type="hidden" name="expected_prime" value="3">
+    <input id='prime_num' type="hidden" name="prime_num" value="3">
+    <input type="number" id="next_prime" required="required" name="next_prime" onkeydown="if (event.key === 'Enter')  {addNextPrime();}">
+    <span onclick="addNextPrime()">I've entered next prime!</span>
+</div>
+</form>
+<h2>Calculator</h2>
+
+<div class="span-block">
+    <span onclick="generateRandom()" id="random">Generate random number</span>
+    <span type="submit" onclick="clearField()">Clear it!</span>
+    <span id="enter" type="submit" onclick="calc()">Let's calc it!</span><br>
+    <span><input id="field" type="text" onkeydown="if(event.key === 'Enter') {e.preventDefault(); calc()}"><br>
+        <label for="field">Enter your expression!</label></span>
+</div>
+    <div id="res" class="result"></div>
+<script>
+  let primes = [2]; // массив простых чисел, начинается с 2
+
+  function isPrime(num) {
+    // функция, которая проверяет, является ли число простым
+    if (num < 2) {
+      return false;
+    }
+    for (let i = 2; i <= Math.sqrt(num); i++) {
+      if (num % i === 0) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  function getNextPrime() {
+    // функция, которая возвращает следующее простое число
+    let num = primes[primes.length - 1] + 1;
+    while (!isPrime(num)) {
+      num++;
+    }
+    return num;
+  }
+
+  function addNextPrime() {
+    // функция, которая добавляет следующее простое число в вывод
+    let input = document.getElementById("next_prime");
+    let next = getNextPrime();
+    if (parseInt(input.value) === next) {
+      primes.push(next);
+      let output = document.getElementById("output");
+      output.innerText += ", " + next;
+      input.value = "";
+      document.getElementById('expected').setAttribute("value", '' + getNextPrime());
+      document.getElementById('prime_num').setAttribute("value", '' + (parseInt(document.getElementById('prime_num').getAttribute('value')) + 1));
+    } else {
+      document.getElementById('expected').setAttribute("value", '' + next);
+      alert("Incorrect!!");
+    }
+  }
+</script>

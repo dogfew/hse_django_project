@@ -1,0 +1,22 @@
+{% load static %}
+{% block content %}
+<link href="{% static 'styles/beautiful.css' %}" rel="stylesheet" type="text/css">
+
+<div class="content">
+    <h4>Click at this image!</h4>
+    <a href="{% static 'images/anime.jpg' %}" target="_blank"><img src="{% static 'images/anime.jpg' %}" alt="" width="100px"></a>
+</div>
+<div class="content">
+    <h4>Cat is walking!</h4>
+    <img src="{% static 'images/cat.gif' %}" alt="Cat" width="80%">
+</div>
+<div class="content">
+    <h4>Wake up!</h4>
+    <img src="{% static 'images/wakeup.gif' %}" alt="Wake up" width="80%">
+</div>
+<div class="content">
+    <h4>Example of loop in C++</h4>
+    <img src="{% static 'images/svinya.gif' %}" alt="Pigs" width="80%"> <br>
+    <a href="#1"><h4>go up!</h4></a>
+</div>
+{% endblock %}
