@@ -72,7 +72,7 @@ def get_opinion(request, context):
     render_page_content(context['page'].content, context)
     return render(request,'base.html', context)
 
-@csrf_protect
+
 def interactive_controller(request, context):
     print(request.method)
     if request.method == 'POST':
