@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<head>
+<link href="{% static 'styles/style.css'  %}" rel="stylesheet" type="text/css">
+<link href="{% static 'styles/form.css'  %}" rel="stylesheet" type="text/css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<h2>Результат</h2>
+<div class="table" style="display: {% if condition %}none{% endif %}">
+{% if number_guess.is_correct %}
+    <p>Ваш ответ правильный! {{ number_guess.number }} - это {{ translation }}</p>
+{% else %}
+    <p>Ваш ответ неправильный. {{ number_guess.number }} - это не {{ translation }}</p>
+{% endif %}
+</div>
+<button id="show-table-button" class="button" onclick="toggleTable()">Вывести таблицу</button>
+<button onclick="goBack()" class="button">Назад</button>
+
+<div id="results-container">
+
+<div class="table" id="results-table" style="display: {% if not condition %}none{% endif %}">
+<table>
+  <thead>
+    <tr>
+      <th>Average Correct</th>
+      <th>Average Number</th>
+    </tr>
+    <tr>
+      <td>{{ avg_correct }}</td>
+      <td>{{ avg_number }}</td>
+    </tr>
+    <tr>
+      <th>Number
+        <div class="sort-icons">
+          <a href="?sort=number&order=asc" class="sort-icon">▲</a>
+          <a href="?sort=number&order=desc" class="sort-icon">▼</a>
+        </div>
+      </th>
+
+      <th>Guess
+        <div class="sort-icons">
+          <a href="?sort=guess&order=asc" class="sort-icon">▲</a>
+          <a href="?sort=guess&order=desc" class="sort-icon">▼</a>
+        </div>
+      </th>
+      <th>Correct
+          <div class="sort-icons">
+          <a href="?sort=is_correct&order=asc" class="sort-icon">▲</a>
+          <a href="?sort=is_correct&order=desc" class="sort-icon">▼</a>
+        </div>
+      </th>
+      <th>Created At
+            <div class="sort-icons">
+          <a href="?sort=created_at&order=asc" class="sort-icon">▲</a>
+          <a href="?sort=created_at&order=desc" class="sort-icon">▼</a>
+        </div>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for number_guess in number_guesses %}
+      <tr>
+        <td>{{ number_guess.number }}</td>
+        <td>{{ number_guess.guess }}</td>
+        <td>{{ number_guess.is_correct }}</td>
+        <td>{{ number_guess.created_at }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+</div>
+    </div>
+
+<script>
+  function toggleTable() {
+    var table = document.getElementById("results-table");
+    var button = document.getElementById("show-table-button");
+
+    if (table.style.display === "none") {
+      table.style.display = "table";
+      button.textContent = "Скрыть таблицу";
+    } else {
+      table.style.display = "none";
+      button.textContent = "Вывести таблицу";
+    }}
+    function goBack() {
+    window.history.back();
+  }
+
+</script>
+<script>
+$(document).on('click', '.sort-icon', function(e) {
+    e.stopPropagation();
+    $('#table[id="results-table"]').css('visibility', 'hidden');
+    var sortParam = $(this).data('sort-param');
+    var sortOrder = $(this).data('sort-order');
+
+    $.get('', { sort: sortParam, order: sortOrder }, function(response) {
+        $('#table[id="results-table"]').html(response.table_html);
+    });
+    $('#table[id="results-table"]').css('visibility', 'visible');
+    console.log("You clicked sort button!");
+});
+</script>
+{% endblock %}

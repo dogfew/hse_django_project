@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang='en'>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>{{page.title }}</title>
+    <link href="{% static 'styles/style.css' %}" rel="stylesheet" type="text/css">
+    {% if page.has_form %} <link href="{% static 'styles/form.css' %}" rel="stylesheet" type="text/css">
+    {% endif %}
+    <link href="{% static 'styles/'%}{{page.stylesheet}}" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+
+<!--Меню-->
+<nav class="menu">
+    {% for page in pages %}
+        <a href="{% url 'page' nav=page.nav %}">
+            <span class="{% if request.path == page.get_absolute_url %}current{% else %}nonCurrent{% endif %}">
+                {{ page.title }}
+            </span>
+        </a>
+    {% endfor %}
+    <a href="/guessing">
+        <span class="{% if request.path == page.get_absolute_url %}current{% else %}nonCurrent{% endif %}">
+            Задача
+        </span>
+    </a>
+</nav>
+
+<div>
+<!--Если у страницы есть оглавление, отобразить его -->
+{% if page.header is not None %}
+<h2 id="1"> {{ page.header }}</h2>
+{% endif %}
+<!--Если у страницы есть форма, то отобразить её-->
+{% if page.has_form %}
+    <form method="post" action="{{request.path}}" id="">
+        <p id="form-message"></p>
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit" class="button">Submit</button>
+    </form>
+{% endif %}
+<!--Отобразить контент текущей страницы-->
+{{ rendered_content }}
+</div>
+<!--Для страниц не из БД-->
+{% block content %}
+{% endblock %}
+</body>
+<script src="{% static 'scripts/'%}{{ page.javascript }}"></script>
+</html>
