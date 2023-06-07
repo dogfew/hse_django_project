@@ -1,4 +1,4 @@
-nav {
+.menu {
     border: 1px groove black;
     transition: .2s linear;
     border-radius: 15px;
@@ -103,4 +103,7 @@ a {
 }
 .hidden {
     display: none;
+}
+body {
+    font-family: Serif;
 }
