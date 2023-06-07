@@ -68,6 +68,7 @@ table  {
     border-spacing: 10px 20px;
     background-size: 100%;
     background-repeat: no-repeat;
+    transition: opacity 0.5s ease;
 }
 th, td {
     padding: 20px 15px;
