@@ -10,6 +10,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.css">
 <h2>Результат</h2>
+    <form method="post">
+    {% csrf_token %}
+    <br>
+    {{ form }}
+</form>
+
+<h2>Результаты</h2>
 
 <div id="results-container">
 <div id="results-table" >
@@ -24,3 +31,4 @@
 </div>
 </div>
 {% endblock %}
+
