@@ -1,6 +1,9 @@
 from django.shortcuts import render
-from django.db.models import Avg
-
+from django.db.models import Avg, StdDev, Sum
+from django_filters.views import FilterView
+from django_tables2 import MultiTableMixin, RequestConfig, SingleTableMixin, SingleTableView
+from .tables import NumberGuessTable
+from .filters import NumberGuessFilter
 from .forms import NumberGuessForm
 from .models import NumberGuess
 import random
@@ -21,13 +24,13 @@ def number_guessing_view(request):
         context['condition'] = True
         sort_order = request.GET.get('order', None)
         number_guesses = NumberGuess.objects.order_by('-' * (sort_order == 'desc') + sort_param)
+        n_guesses = len(context['number_guesses'])
         context['number_guesses'] = number_guesses
+        context['n_guesses'] = n_guesses
         return render(request, 'number_guessing/result.html', context=context)
     if request.method == 'POST':
         form = NumberGuessForm(request.POST)
-        print(request.POST)
         if form.is_valid():
-            print('form is valid')
             guess = form.cleaned_data['guess']
             number = form.cleaned_data['number']
             is_correct = check_user_guess(number, guess)
@@ -38,13 +41,14 @@ def number_guessing_view(request):
                 is_correct=is_correct,
             )
             number_guess.save()
-
             translation = {'positive': 'положительное число!',
                            'negative': 'отрицательное число!',
                            'zero': 'ноль.'}
             context['translation'] = translation[guess]
             context['number_guesses'] = NumberGuess.objects.all()
+            n_guesses = len(context['number_guesses'])
             context['number_guess'] = number_guess
+            context['n_guesses'] = n_guesses
             return render(request, 'number_guessing/result.html', context=context)
     number = generate_random_number()
     form = NumberGuessForm(initial={'number': number})
@@ -74,3 +78,15 @@ def check_user_guess(number, guess):
     elif number == 0 and guess == 'zero':
         return True
     return False
+
+
+class FilteredNumberGuessListView(SingleTableMixin, FilterView):
+    table_class = NumberGuessTable
+    model = NumberGuess
+    template_name = "number_guessing/template.html"
+
+    filterset_class = NumberGuessFilter
+
+def display_table(request):
+    table = FilteredNumberGuessListView
+    RequestConfig
