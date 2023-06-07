@@ -1,27 +1,47 @@
 import datetime
 
 from django.http import HttpRequest, HttpResponseRedirect, HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.utils import timezone
+from django.views.generic import DetailView
+from django.template import Template, Context, RequestContext
+from django.views.decorators.csrf import csrf_protect
 
 from .forms import ContactForm, OpinionForm
-from .models import Person, Opinion, Task
+from .models import Person, Opinion, Task, Page
 
 
 # Create your views here.
-
-class SimpleHandler:
-    def __init__(self, target: str):
-        """
-        :param target: html-page.
-        """
-        self.target = target
-
-    def __call__(self, request: HttpRequest):
-        return render(request, self.target, {'page_title': self.target.split('.')[0].capitalize()})
+def start(request):
+    return redirect('/index')
 
 
-def get_contact(request):
+def render_page_content(content, context):
+    template = Template(content)
+    rendered_content = template.render(Context(context))
+    context['rendered_content'] = rendered_content
+
+
+def page_detail_view(request, nav=''):
+    form = None
+    page = Page.objects.get(nav=nav)
+    context = {'page': page,
+               'nav': nav,
+               'form': form}
+    render_page_content(page.content, context)
+    match page.form_type:
+        case 'contact':
+            return get_contact(request, context)
+        case 'opinion':
+            return get_opinion(request, context)
+        case 'interactive':
+            return interactive_controller(request, context)
+        case _:
+            pass
+    return render(request, 'base.html', context=context)
+
+
+def get_contact(request, context):
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
@@ -31,10 +51,12 @@ def get_contact(request):
             person.save()
             return HttpResponse(f"Информация записана!<br>{data}<br><a href=''>Назад</a>")
     form = ContactForm()
-    return render(request, 'forms.html', {'form': form, 'page_title': 'Contact'})
+    render_page_content(context['page'].content, context)
+    context['form'] = form
+    return render(request, 'base.html', context=context)
 
 
-def get_opinion(request):
+def get_opinion(request, context):
     query_results = Opinion.objects.all()
     if request.method == 'POST':
         form = OpinionForm(request.POST)
@@ -44,19 +66,15 @@ def get_opinion(request):
             new_opinion = Opinion(**data)
             new_opinion.save()
             return HttpResponseRedirect('')
-    else:
-        form = OpinionForm()
-    return render(request,
-                  'opinion.html',
-                  {
-                      'form': form,
-                      'query_results': query_results,
-                      'page_title': 'Form'
-                  }
-                  )
+    form = OpinionForm()
+    context['query_results'] = query_results
+    context['form'] = form
+    render_page_content(context['page'].content, context)
+    return render(request,'base.html', context)
 
-
-def interactive_controller(request):
+@csrf_protect
+def interactive_controller(request, context):
+    print(request.method)
     if request.method == 'POST':
         try:
             expected_prime = int(request.POST.get('expected_prime'))
@@ -73,4 +91,5 @@ def interactive_controller(request):
             print(e)
             return HttpResponse(f"Информация не записана!<br>Неверный формат ввода.<br>"
                                 f"<br><a href=''>Назад</a>")
-    return render(request, 'interactive.html', {'page_title': 'Calculator'})
+    render_page_content(context['page'].content, context)
+    return render(request, 'base.html', context)
