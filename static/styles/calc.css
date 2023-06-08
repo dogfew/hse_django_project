@@ -1,40 +1,11 @@
-.result {
-    display: flex;
-    transition: .2s linear;
-    border-radius: 5px;
-    text-align:center;
-    background-size: cover;
-    background-color: #f6f69e;
-    font-size: large;
-    padding: .8571429em 1.1428571em;
-}
-
 h2 {
-  font-size: x-large;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    background: #ef6d6d;
+    background-clip: border-box;
+    border-radius: 5px;
+    padding: 7px 7px;
+    color: white;
+    max-width: 700px;
 }
-
-input {
-    font-size: large;
-    width: 50%
-}
-.span-block {
-  text-align:center;
-}
-.span-block span, button {
-  text-align: center;
-  display: inline-block;
-  margin: 15px;
-  padding: 20px 30px;
-  cursor: pointer;
-  border-radius: 10px;
-  color: black;
-  transition: .2s linear;
-}
-.span-block span, button{
-  background: #d4f597;
-  width: 60%;
-}
-.span-block span, button:hover {
-  box-shadow: 0 0 0 3px white, 0 0 0 6px #d4f597;
-}
-
