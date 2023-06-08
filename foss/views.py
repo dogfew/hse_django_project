@@ -1,14 +1,10 @@
-import datetime
-
-from django.http import HttpRequest, HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect
 from django.utils import timezone
-from django.views.generic import DetailView
-from django.template import Template, Context, RequestContext
-from django.views.decorators.csrf import csrf_protect
+from django.template import Template, Context
 
 from .forms import ContactForm, OpinionForm
-from .models import Person, Opinion, Task, Page
+from .models import Person, Opinion, Task, Page, LatexFormula, CodeExample, SoftExample
 
 
 # Create your views here.
@@ -28,6 +24,12 @@ def page_detail_view(request, nav=''):
     context = {'page': page,
                'nav': nav,
                'form': form}
+    if nav == 'formulas':
+        context['formulas'] = LatexFormula.objects.all()
+    elif nav == 'codes':
+        context['codes'] = CodeExample.objects.all()
+    elif nav =='about':
+        context['programms'] = SoftExample.objects.all()
     render_page_content(page.content, context)
     match page.form_type:
         case 'contact':
@@ -49,6 +51,9 @@ def get_contact(request, context):
             data['date'] = timezone.now()
             person = Person(**data)
             person.save()
+            render_page_content(f"<div class='table'>Информация записана!<br>{data}<br></div><button class='button'><a href=''>Назад</a></button>", context)
+            context['page'].has_form = False
+            return render(request, 'base.html', context=context)
             return HttpResponse(f"Информация записана!<br>{data}<br><a href=''>Назад</a>")
     form = ContactForm()
     render_page_content(context['page'].content, context)
@@ -66,11 +71,14 @@ def get_opinion(request, context):
             new_opinion = Opinion(**data)
             new_opinion.save()
             return HttpResponseRedirect('')
-    form = OpinionForm()
+        else:
+            form = OpinionForm(query_results)
+    else:
+        form = OpinionForm()
     context['query_results'] = query_results
     context['form'] = form
     render_page_content(context['page'].content, context)
-    return render(request,'base.html', context)
+    return render(request, 'base.html', context)
 
 
 def interactive_controller(request, context):

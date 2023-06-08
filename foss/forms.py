@@ -6,7 +6,6 @@ class ContactForm(forms.Form):
     second_name = forms.CharField(max_length=100, label='')
     phone = forms.CharField(max_length=100, empty_value='Enter your phone!', label='')
     email = forms.EmailField(label='')
-#    date = forms.DateField(widget=forms.SelectDateWidget, label='')
 
     def __init__(self, *args, **kwargs):
         super(ContactForm, self).__init__(*args, **kwargs)
