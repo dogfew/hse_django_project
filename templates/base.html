@@ -16,7 +16,7 @@
 <nav class="navbar expand-lg navbar-fixed-top navbar-inverse" id="navbar">
   <div class="container-fluid">
     <div class="navbar-header">
-          <a class="navbar-brand" href="#">Владимир Перепёлкин</a>
+        <a class="navbar-brand" href="/admin" target="_blank" rel="noopener noreferrer">Admin Panel</a>
     </div>
     <ul class="nav navbar-nav">
     {% for page in pages %}
@@ -50,7 +50,7 @@
     <form method="post" action="{{request.path}}" id="" class="form-horizontal">
         <p id="form-message"></p>
         {% csrf_token %}
-        {{ form.as_p }}
+        {{ form.as_table}}
 
         <input type="submit" class="btn btn-primary" style="width: 15%"></input>
     </form>

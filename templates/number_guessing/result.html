@@ -3,6 +3,7 @@
 {% block content %}
 <head>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link href="{% static 'styles/about.css'%}" rel="stylesheet" type="text/css">
 </head>
 <h2>Результат</h2>
 <div class="table" style="display: {% if condition %}none{% endif %}">
@@ -18,6 +19,19 @@
 <div id="results-container">
 
 <div class="table" id="results-table" style="display: {% if not condition %}none{% endif %}">
+<form method="get" action="">
+  <input type="hidden" name="sort" value="{{ sort }}">
+  <input type="hidden" name="order" value="{{ order }}">
+  <label for="filter_col">Filter by:</label>
+  <select name="filter_col" id="filter_col">
+    <option value="is_correct">Correct</option>
+    <option value="number" {% if filter_col == 'number' %}selected{% endif %}>Number</option>
+    <option value="guess">Guess</option>
+  </select>
+  <label for="filter_val">Filter value:</label>
+  <input type="text" name="filter_val" id="filter_val" value="{{ filter_val }}">
+  <button type="submit">Filter</button>
+</form>
 <table>
   <thead>
     <tr>
@@ -33,7 +47,7 @@
     <tr>
       <th>Number
         <div class="sort-icons">
-          <a href="?sort=number&order=asc" class="sort-icon">▲</a>
+          <a href="?sort=number&order=asc{% if filter_col == 'is_correct' and filter_val %}&filter_col=is_correct&filter_val={{ filter_val }}{% endif %}" class="sort-icon">▲</a>
           <a href="?sort=number&order=desc" class="sort-icon">▼</a>
         </div>
       </th>
