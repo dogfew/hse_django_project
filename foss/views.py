@@ -27,7 +27,7 @@ def page_detail_view(request, nav=''):
     if nav == 'formulas':
         context['formulas'] = LatexFormula.objects.all()
     elif nav == 'codes':
-        context['codes'] = CodeExample.objects.all()
+        context['codes'] = CodeExample.objects.order_by('order')
     elif nav =='about':
         context['programms'] = SoftExample.objects.all()
     render_page_content(page.content, context)
@@ -51,10 +51,13 @@ def get_contact(request, context):
             data['date'] = timezone.now()
             person = Person(**data)
             person.save()
-            render_page_content(f"<div class='table'>Информация записана!<br>{data}<br></div><button class='button'><a href=''>Назад</a></button>", context)
+            data_out = '<br>'.join([f"<b>{key}:</b> {value}" for key, value in data.items()])
+            render_page_content(
+
+                f"<div class='table'><h3>Информация записана!</h3><br>{data_out}<br></div><button><a href=''>Назад</a></button>",
+                context)
             context['page'].has_form = False
             return render(request, 'base.html', context=context)
-            return HttpResponse(f"Информация записана!<br>{data}<br><a href=''>Назад</a>")
     form = ContactForm()
     render_page_content(context['page'].content, context)
     context['form'] = form
@@ -82,7 +85,6 @@ def get_opinion(request, context):
 
 
 def interactive_controller(request, context):
-    print(request.method)
     if request.method == 'POST':
         try:
             expected_prime = int(request.POST.get('expected_prime'))

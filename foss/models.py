@@ -70,6 +70,7 @@ class CodeExample(models.Model):
     code = models.TextField(verbose_name="Code", max_length=1024, blank=True)
     lang = models.CharField(verbose_name="Programming Language", max_length=255, blank=True, default='python')
     order = models.IntegerField(default=0)
+    show = models.BooleanField(default=True, blank=True)
 
     def __str__(self):
         return f"{self.header} ({self.lang})"
@@ -78,6 +79,7 @@ class CodeExample(models.Model):
 class SoftExample(models.Model):
     programm_name = models.CharField(verbose_name="Programm Name", max_length=255, blank=False)
     icon_path = models.TextField(verbose_name="Icon Path", max_length=1024, blank=True)
+   # icon_path = models.ImageField(blank=True)
     description = models.CharField(verbose_name="Description", max_length=255, blank=True, default='python')
     link = models.CharField(verbose_name="Link", max_length=255, blank=True, default='')
 
