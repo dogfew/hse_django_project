@@ -33,4 +33,4 @@ class FilteredSignView(SingleTableMixin, FilterView):
                 sign_text=translation[sign],
             )
             sign_object.save()
-            return redirect('/sign/')
+            return redirect('/sign/?sort=-created_at')

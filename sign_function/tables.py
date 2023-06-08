@@ -44,9 +44,9 @@ class SignTable(tables.Table):
     sign = GuessCountColumn(attrs=footer_attrs)
     number = MeanColumn(attrs=footer_attrs)
     sign_text = tables.Column(attrs=footer_attrs)
-    created_at = tables.Column(attrs=footer_attrs)
+    created_at = tables.Column(attrs=footer_attrs, orderable=True)
 
     class Meta:
         model = Sign
         template_name = "django_tables2/bootstrap.html"
-        fields = ("condition", "number", "sign", "sign_text", "created_at")
+        fields = ("created_at", "condition", "number", "sign", "sign_text")

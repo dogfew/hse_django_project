@@ -11,6 +11,8 @@ import random
 
 def number_guessing_view(request):
     sort_param = request.GET.get('sort')
+    filter_col = request.GET.get('filter_col')
+    filter_value = request.GET.get('filter_val')
     avg_correct = NumberGuess.objects.aggregate(Avg('is_correct'))['is_correct__avg']
     avg_number = NumberGuess.objects.aggregate(Avg('number'))['number__avg']
     context = {
@@ -20,10 +22,18 @@ def number_guessing_view(request):
         'condition': False,
         'translation': None
     }
+    if filter_col is not None:
+        sort_param = 'created_at'
     if sort_param is not None:
         context['condition'] = True
         sort_order = request.GET.get('order')
+        print("sort_order", sort_order)
         number_guesses = NumberGuess.objects.order_by('-' * (sort_order == 'desc') + sort_param)
+        if filter_col is not None:
+            try:
+                number_guesses = number_guesses.filter(**{filter_col: filter_value})
+            except Exception:
+                pass
         n_guesses = len(context['number_guesses'])
         context['number_guesses'] = number_guesses
         context['n_guesses'] = n_guesses
@@ -78,6 +88,7 @@ def check_user_guess(number, guess):
     elif number == 0 and guess == 'zero':
         return True
     return False
+
 
 
 class FilteredNumberGuessListView(SingleTableMixin, FilterView):
